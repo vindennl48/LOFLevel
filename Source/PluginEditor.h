@@ -36,13 +36,10 @@ public:
 
 private:
     RotaryKnob rotary_gain;
-    BasicLabel label_rotary_gain;
     
     RotaryKnob rotary_target;
-    BasicLabel label_rotary_target;
     
     RotaryKnob rotary_threshold;
-    BasicLabel label_rotary_threshold;
     
     AnalyzeButton btn_analyze;
     

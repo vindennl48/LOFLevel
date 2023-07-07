@@ -3,12 +3,14 @@
 #pragma once
 
 // Conversions ---------------------------------------
-#define S(x)           juce::String(x)
-#define S2(x1, x2)     S(x1) + S(x2)
-#define S3(x1, x2, x3) S(x1) + S(x2) + S(x3)
+#define S(x)                juce::String(x)
+#define S2(x1, x2)          S(x1) + S(x2)
+#define S3(x1, x2, x3)      S(x1) + S(x2) + S(x3)
+#define S4(x1, x2, x3, x4)  S(x1) + S(x2) + S(x3) + S(x4)
 
-#define DBG2(x1, x2)     DBG(S2(x1, x2))
-#define DBG3(x1, x2, x3) DBG(S3(x1, x2, x3))
+#define DBG2(x1, x2)            DBG(S2(x1, x2))
+#define DBG3(x1, x2, x3)        DBG(S3(x1, x2, x3))
+#define DBG4(x1, x2, x3, x4)    DBG(S4(x1, x2, x3, x4))
 
 #define TOD(x) juce::Decibels::gainToDecibels((x))
 #define TOG(x) juce::Decibels::decibelsToGain((x))

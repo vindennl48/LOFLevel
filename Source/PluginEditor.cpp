@@ -13,12 +13,9 @@
 LOFLevelAudioProcessorEditor::LOFLevelAudioProcessorEditor (LOFLevelAudioProcessor& p)
   : AudioProcessorEditor (&p),
     audioProcessor (p),
-    rotary_gain(p.valueTree, "gain"),
-    label_rotary_gain("Gain"),
-    rotary_target(p.valueTree, "target"),
-    label_rotary_target("Target"),
-    rotary_threshold(p.valueTree, "threshold"),
-    label_rotary_threshold("Threshold"),
+    rotary_gain("Gain", p.valueTree, "gain"),
+    rotary_target("Target", p.valueTree, "target"),
+    rotary_threshold("Threshold", p.valueTree, "threshold"),
     btn_analyze("Analyze", p.valueTree, "analyze"),
     label_btn_reset("Standby..")
 {
@@ -28,15 +25,12 @@ LOFLevelAudioProcessorEditor::LOFLevelAudioProcessorEditor (LOFLevelAudioProcess
     
     // GAIN SLIDER
     addAndMakeVisible(rotary_gain);
-    addAndMakeVisible(label_rotary_gain);
     
     // TARGET SLIDER
     addAndMakeVisible(rotary_target);
-    addAndMakeVisible(label_rotary_target);
     
     // THRESHOLD SLIDER
     addAndMakeVisible(rotary_threshold);
-    addAndMakeVisible(label_rotary_threshold);
     
     // ANALYZE BUTTON
     addAndMakeVisible(btn_analyze);
@@ -93,12 +87,6 @@ void LOFLevelAudioProcessorEditor::resized()
                            PAD(10, GET_QSIZE_X(2)),     // width
                            PAD(10, GET_QSIZE_Y(2))      // height
                            );
-    SET_BOUNDS_FROM_CENTER(label_rotary_gain,
-                           GET_QPOS_X(2, 1),            // pos X
-                           GET_QPOS_Y(2, 1)-25,         // pos y
-                           PAD(10, GET_QSIZE_X(4)),     // width
-                           PAD(10, GET_QSIZE_Y(4))      // height
-                           );
     
     // TARGET SLIDER
     SET_BOUNDS_FROM_CENTER(rotary_target,
@@ -107,12 +95,6 @@ void LOFLevelAudioProcessorEditor::resized()
                            PAD(10, GET_QSIZE_X(2)),     // width
                            PAD(10, GET_QSIZE_Y(2))      // height
                            );
-    SET_BOUNDS_FROM_CENTER(label_rotary_target,
-                           GET_QPOS_X(2, 2),            // pos X
-                           GET_QPOS_Y(2, 1)-25,         // pos y
-                           PAD(10, GET_QSIZE_X(4)),     // width
-                           PAD(10, GET_QSIZE_Y(4))      // height
-                           );
     
     // THRESHOLD SLIDER
     SET_BOUNDS_FROM_CENTER(rotary_threshold,
@@ -120,12 +102,6 @@ void LOFLevelAudioProcessorEditor::resized()
                            GET_QPOS_Y(2, 2),            // pos y
                            PAD(10, GET_QSIZE_X(2)),     // width
                            PAD(10, GET_QSIZE_Y(2))      // height
-                           );
-    SET_BOUNDS_FROM_CENTER(label_rotary_threshold,
-                           GET_QPOS_X(2, 1),            // pos X
-                           GET_QPOS_Y(2, 2)-25,         // pos y
-                           PAD(10, GET_QSIZE_X(4)),     // width
-                           PAD(10, GET_QSIZE_Y(4))      // height
                            );
     
     // ANALYZE BUTTON
