@@ -66,11 +66,25 @@ void LOFLevelAudioProcessorEditor::timerCallback()
 //==============================================================================
 void LOFLevelAudioProcessorEditor::paint (juce::Graphics& g)
 {
+    img_background = juce::ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
+    g.drawImageWithin(img_background, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
+    
+    img_gainSlider = juce::ImageCache::getFromMemory(BinaryData::GainSlider_png, BinaryData::GainSlider_pngSize);
+    
+    int cutoff = img_gainSlider.getHeight() * 0.75f;
+    g.drawImage(img_gainSlider,
+                7, 443-cutoff,                          // dest location
+                img_gainSlider.getWidth(), cutoff,      // dest size
+                0, img_gainSlider.getHeight()-cutoff,   // source location
+                img_gainSlider.getWidth(), cutoff,      // source size
+                false                                   // use alpha channel
+                );
+    
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    // g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
-    g.setColour (juce::Colours::white);
-    g.setFont (24.0f);
+    // g.setColour (juce::Colours::white);
+    // g.setFont (24.0f);
     // g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 

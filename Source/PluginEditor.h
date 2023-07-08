@@ -11,9 +11,9 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "Helpers.h"
-#include "RotaryKnob.h"
+#include "Basic Components/RotaryKnob.h"
 #include "BasicLabel.h"
-#include "AnalyzeButton.h"
+#include "Custom Components/AnalyzeButton.h"
 
 //==============================================================================
 /**
@@ -35,6 +35,9 @@ public:
     void resized() override;
 
 private:
+    juce::Image img_background;
+    juce::Image img_gainSlider;
+    
     RotaryKnob rotary_gain;
     
     RotaryKnob rotary_target;

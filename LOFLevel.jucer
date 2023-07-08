@@ -6,14 +6,35 @@
               pluginFormats="buildAU,buildStandalone" defines="JUCE_MODAL_LOOPS_PERMITTED=1">
   <MAINGROUP id="pspeSa" name="LOFLevel">
     <GROUP id="{976A5D37-E20A-2744-7880-FE16723BEFD1}" name="Source">
-      <GROUP id="{471410B3-745A-E402-84BF-E4EA9F21ECFF}" name="Assets"/>
-      <GROUP id="{E1E8CB52-9131-1741-DD1C-6110FCCD44FD}" name="Custom Components">
-        <FILE id="Tc5dnz" name="AnalyzeButton.h" compile="0" resource="0" file="Source/AnalyzeButton.h"/>
+      <GROUP id="{FE536E0D-7306-7AF4-1CE3-140012D5767D}" name="Basic Components">
+        <FILE id="aFhHGi" name="BasicLabel.h" compile="0" resource="0" file="Source/Basic Components/BasicLabel.h"/>
+        <FILE id="KAibye" name="RotaryKnob.h" compile="0" resource="0" file="Source/Basic Components/RotaryKnob.h"/>
+        <FILE id="ORvsyN" name="ToggleButton.h" compile="0" resource="0" file="Source/Basic Components/ToggleButton.h"/>
       </GROUP>
-      <GROUP id="{8592C93F-BDAA-9D07-EA0D-84EAAC1E9CD6}" name="Basic Components">
-        <FILE id="rT0lxZ" name="BasicLabel.h" compile="0" resource="0" file="Source/BasicLabel.h"/>
-        <FILE id="URXBRA" name="RotaryKnob.h" compile="0" resource="0" file="Source/RotaryKnob.h"/>
-        <FILE id="F40KtS" name="ToggleButton.h" compile="0" resource="0" file="Source/ToggleButton.h"/>
+      <GROUP id="{136DD4FE-16C8-9FB8-8EFF-098B689CBAEF}" name="Custom Components">
+        <FILE id="Pzgby5" name="AnalyzeButton.h" compile="0" resource="0" file="Source/Custom Components/AnalyzeButton.h"/>
+        <FILE id="M2hHoK" name="ImageSlider.h" compile="0" resource="0" file="Source/Custom Components/ImageSlider.h"/>
+      </GROUP>
+      <GROUP id="{4D94C5E3-8609-FBA6-FB90-481D020435DE}" name="Assets">
+        <FILE id="XP0M3y" name="AnalyzeButton_hover.png" compile="0" resource="1"
+              file="Source/Assets/AnalyzeButton_hover.png"/>
+        <FILE id="OznCaf" name="AnalyzeButton_off.png" compile="0" resource="1"
+              file="Source/Assets/AnalyzeButton_off.png"/>
+        <FILE id="GOJ9GR" name="Background.png" compile="0" resource="1" file="Source/Assets/Background.png"/>
+        <FILE id="j4yYO9" name="Background_Layout.png" compile="0" resource="1"
+              file="Source/Assets/Background_Layout.png"/>
+        <FILE id="dJFzQQ" name="GainSlider.png" compile="0" resource="1" file="Source/Assets/GainSlider.png"/>
+        <FILE id="AqFPZT" name="ProcessingButton_on.png" compile="0" resource="1"
+              file="Source/Assets/ProcessingButton_on.png"/>
+        <FILE id="y6YXbM" name="ProcessingButton_on_hover.png" compile="0"
+              resource="1" file="Source/Assets/ProcessingButton_on_hover.png"/>
+        <FILE id="BVuuyZ" name="reset_down.png" compile="0" resource="1" file="Source/Assets/reset_down.png"/>
+        <FILE id="S7z6oM" name="reset_hover.png" compile="0" resource="1" file="Source/Assets/reset_hover.png"/>
+        <FILE id="zlq8x3" name="reset_off.png" compile="0" resource="1" file="Source/Assets/reset_off.png"/>
+        <FILE id="qfpN4J" name="TargetSlider.png" compile="0" resource="1"
+              file="Source/Assets/TargetSlider.png"/>
+        <FILE id="GpC3TK" name="ThresholdSlider.png" compile="0" resource="1"
+              file="Source/Assets/ThresholdSlider.png"/>
       </GROUP>
       <FILE id="R9Qsju" name="PluginProcessor_unused.cpp" compile="1" resource="0"
             file="Source/PluginProcessor_unused.cpp"/>
