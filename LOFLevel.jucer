@@ -7,6 +7,7 @@
   <MAINGROUP id="pspeSa" name="LOFLevel">
     <GROUP id="{976A5D37-E20A-2744-7880-FE16723BEFD1}" name="Source">
       <GROUP id="{471410B3-745A-E402-84BF-E4EA9F21ECFF}" name="Assets"/>
+      <GROUP id="{16177DED-8347-4D4D-8F86-FA8A47466B95}" name="Windows"/>
       <GROUP id="{E1E8CB52-9131-1741-DD1C-6110FCCD44FD}" name="Custom Components">
         <FILE id="Tc5dnz" name="AnalyzeButton.h" compile="0" resource="0" file="Source/AnalyzeButton.h"/>
       </GROUP>
@@ -14,6 +15,9 @@
         <FILE id="rT0lxZ" name="BasicLabel.h" compile="0" resource="0" file="Source/BasicLabel.h"/>
         <FILE id="URXBRA" name="RotaryKnob.h" compile="0" resource="0" file="Source/RotaryKnob.h"/>
         <FILE id="F40KtS" name="ToggleButton.h" compile="0" resource="0" file="Source/ToggleButton.h"/>
+        <FILE id="aCbR4t" name="Window.h" compile="0" resource="0" file="Source/Window.h"/>
+        <FILE id="IpjMFs" name="WindowSwitcher.h" compile="0" resource="0"
+              file="Source/WindowSwitcher.h"/>
       </GROUP>
       <FILE id="R9Qsju" name="PluginProcessor_unused.cpp" compile="1" resource="0"
             file="Source/PluginProcessor_unused.cpp"/>

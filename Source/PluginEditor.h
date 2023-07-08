@@ -15,6 +15,8 @@
 #include "BasicLabel.h"
 #include "AnalyzeButton.h"
 
+#include "WindowSwitcher.h"
+
 //==============================================================================
 /**
 */
@@ -35,16 +37,18 @@ public:
     void resized() override;
 
 private:
-    RotaryKnob rotary_gain;
+//    RotaryKnob rotary_gain;
+//
+//    RotaryKnob rotary_target;
+//
+//    RotaryKnob rotary_threshold;
+//
+//    AnalyzeButton btn_analyze;
+//
+//    juce::TextButton btn_reset {"Reset"};
+//    BasicLabel label_btn_reset;
     
-    RotaryKnob rotary_target;
-    
-    RotaryKnob rotary_threshold;
-    
-    AnalyzeButton btn_analyze;
-    
-    juce::TextButton btn_reset {"Reset"};
-    BasicLabel label_btn_reset;
+    WindowSwitcher windowSwitcher;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LOFLevelAudioProcessorEditor)
 };
