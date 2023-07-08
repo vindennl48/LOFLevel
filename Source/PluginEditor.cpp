@@ -17,29 +17,37 @@ LOFLevelAudioProcessorEditor::LOFLevelAudioProcessorEditor (LOFLevelAudioProcess
     rotary_target("Target", p.valueTree, "target"),
     rotary_threshold("Threshold", p.valueTree, "threshold"),
     btn_analyze("Analyze", p.valueTree, "analyze"),
-    label_btn_reset("Standby..")
+    label_btn_reset("Standby.."),
+    gainSlider(p.valueTree, "gain", juce::ImageCache::getFromMemory(BinaryData::GainSlider_png, BinaryData::GainSlider_pngSize)),
+    targetSlider(p.valueTree, "target", juce::ImageCache::getFromMemory(BinaryData::TargetSlider_png, BinaryData::TargetSlider_pngSize)),
+    thresholdSlider(p.valueTree, "threshold", juce::ImageCache::getFromMemory(BinaryData::ThresholdSlider_png, BinaryData::ThresholdSlider_pngSize))
 {
     // this will run every time the plugin window opens
     
     startTimer(100.0);  // update frequency for peak label
     
-    // GAIN SLIDER
-    addAndMakeVisible(rotary_gain);
+    // custom gain slider
+    addAndMakeVisible(gainSlider);
+    addAndMakeVisible(targetSlider);
+    addAndMakeVisible(thresholdSlider);
     
-    // TARGET SLIDER
-    addAndMakeVisible(rotary_target);
+    // GAIN SLIDER
+//    addAndMakeVisible(rotary_gain);
+    
+//     TARGET SLIDER
+//    addAndMakeVisible(rotary_target);
     
     // THRESHOLD SLIDER
-    addAndMakeVisible(rotary_threshold);
+//    addAndMakeVisible(rotary_threshold);
     
     // ANALYZE BUTTON
-    addAndMakeVisible(btn_analyze);
+//    addAndMakeVisible(btn_analyze);
     
     // RESET BUTTON
     btn_reset.setClickingTogglesState(false);
     btn_reset.onClick = [&]() { p.resetPeak(); };
-    addAndMakeVisible(btn_reset);
-    addAndMakeVisible(label_btn_reset);
+//    addAndMakeVisible(btn_reset);
+//    addAndMakeVisible(label_btn_reset);
     
     // WINDOW
     setSize (500, 500);
@@ -66,19 +74,9 @@ void LOFLevelAudioProcessorEditor::timerCallback()
 //==============================================================================
 void LOFLevelAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    img_background = juce::ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
+//    img_background = juce::ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
+    img_background = juce::ImageCache::getFromMemory(BinaryData::Background_Layout_png, BinaryData::Background_Layout_pngSize);
     g.drawImageWithin(img_background, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
-    
-    img_gainSlider = juce::ImageCache::getFromMemory(BinaryData::GainSlider_png, BinaryData::GainSlider_pngSize);
-    
-    int cutoff = img_gainSlider.getHeight() * 0.75f;
-    g.drawImage(img_gainSlider,
-                7, 443-cutoff,                          // dest location
-                img_gainSlider.getWidth(), cutoff,      // dest size
-                0, img_gainSlider.getHeight()-cutoff,   // source location
-                img_gainSlider.getWidth(), cutoff,      // source size
-                false                                   // use alpha channel
-                );
     
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     // g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
@@ -93,6 +91,11 @@ void LOFLevelAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
     // set bounds in this function
+    
+    // custom gain slider
+    gainSlider.setBounds(6, 6, 101, 437);
+    targetSlider.setBounds(6+113, 6, 101, 437);
+    thresholdSlider.setBounds(6+113+113, 6, 101, 437);
     
     // GAIN SLIDER
     SET_BOUNDS_FROM_CENTER(rotary_gain,

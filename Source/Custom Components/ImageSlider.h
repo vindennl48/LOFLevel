@@ -4,7 +4,7 @@
 #include <JuceHeader.h>
 #include "../Helpers.h"
 
-class AddImageToSlider : public juce::LookAndFeel_v4
+class AddImageToSlider : public juce::LookAndFeel_V4
 {
 public:
     juce::Image image;
@@ -13,17 +13,28 @@ public:
       : image(newImage)
     {}
     
-    void drawLinearSlider (Graphics &g, int x, int y, int width, int height, float sliderPos, float minSliderPos, float maxSliderPos, const Slider::SliderStyle, Slider &slider) override
+    void drawLinearSlider (juce::Graphics &g, int x, int y, int width, int height, float sliderPos, float minSliderPos, float maxSliderPos, const juce::Slider::SliderStyle ss, juce::Slider &slider) override
     {
-//        int cutoff = height * 0.75f;
-        int cutoff = height * NORMALIZE(sliderPos, minSliderPos, maxSliderPos);
-        g.drawImage(img_gainSlider,
-                    x, (y+height)-cutoff,   // dest location
-                    width, cutoff,          // dest size
-                    0, height-cutoff,       // source location
-                    width, cutoff,          // source size
-                    false                   // use alpha channel
+        int cutoff = height - (sliderPos - 1);
+        
+        g.drawImage(image,
+                    x, (y+height)-cutoff,       // dest location
+                    width, cutoff,              // dest size
+                    0, height-cutoff,           // source location
+                    image.getWidth(), cutoff,   // source size
+                    false                       // use alpha channel
                     );
+        
+        g.setColour (juce::Colours::antiquewhite);
+        g.setFont (20.0f);
+        g.drawFittedText(S2(juce::String(slider.getValue(), 1), " db"), 0, height-25, width, 25, juce::Justification::centred, 1);
+        
+//        if (slider.getValue() == 6) {
+//            slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 113, 50);
+//            slider.showTextBox();
+//        } else {
+//            slider.setTextBoxStyle(juce::Slider::NoTextBox, false, 113, 50);
+//        }
     }
 };
 
@@ -38,20 +49,32 @@ public:
     {
         // Defaults
 //        setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-        setLookAndFeel(addImageToSlider);
         setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
+        setLookAndFeel(&addImageToSlider);
         
         // TextBox - add one later
-        setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
-        // setTextValueSuffix(" db");
+//        setTextBoxStyle(juce::Slider::NoTextBox, false, 113, 50);
+        setTextBoxStyle(juce::Slider::TextBoxBelow, false, 113, 50);
+        setTextValueSuffix(" db");
         
         // Attach to ValueTree
         attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(p, valueTreeName, *this);
+        
+        // Made this change in the juce_Slider.cpp file to make the label text opaque.  this still lets us open the
+        //  text editor box to type in values but hides the text.
+//        juce::Slider->valueBox->setColour(juce::Label::textColourId, juce::Colours::transparentBlack);
     }
     
     ~ImageSlider()
     {
         attachment.reset();
+        setLookAndFeel(nullptr);
+    }
+    
+    void mouseDoubleClick(const juce::MouseEvent& event) override
+    {
+        DBG("DBLCLICK");
+        showTextBox();
     }
     
     

@@ -14,6 +14,7 @@
 #include "Basic Components/RotaryKnob.h"
 #include "BasicLabel.h"
 #include "Custom Components/AnalyzeButton.h"
+#include "Custom Components/ImageSlider.h"
 
 //==============================================================================
 /**
@@ -36,7 +37,9 @@ public:
 
 private:
     juce::Image img_background;
-    juce::Image img_gainSlider;
+    ImageSlider gainSlider;
+    ImageSlider targetSlider;
+    ImageSlider thresholdSlider;
     
     RotaryKnob rotary_gain;
     
