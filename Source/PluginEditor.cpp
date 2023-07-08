@@ -50,7 +50,7 @@ LOFLevelAudioProcessorEditor::~LOFLevelAudioProcessorEditor() {}
 void LOFLevelAudioProcessorEditor::timerCallback()
 {
     auto currentGain = TOG(rotary_gain.getValue());
-    auto currentPeak = audioProcessor.getPeak();
+    auto currentPeak = TOG(audioProcessor.getPeak());
     
     // no audio then dont process
     if (currentPeak <= 0.0f) {
@@ -58,7 +58,7 @@ void LOFLevelAudioProcessorEditor::timerCallback()
         return;
     }
     
-    auto dbs = TOD(audioProcessor.getPeak() * currentGain);
+    auto dbs = TOD(currentPeak * currentGain);
     
     label_btn_reset.setText(S2(dbs, " db peak"), juce::dontSendNotification);
 }

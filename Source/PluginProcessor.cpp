@@ -55,7 +55,7 @@ void LOFLevelAudioProcessor::parameterChanged(const juce::String& parameterID, f
       if ((bool)newValue) {
           resetPeak();
       } else {
-          float peak_db = TOD(getPeak());
+          float peak_db = getPeak();
           if (peak_db > -100.0f) {
               // failsafe in case there is no audio above threshold
               auto slider_target = GET("target");
@@ -69,7 +69,7 @@ void LOFLevelAudioProcessor::parameterChanged(const juce::String& parameterID, f
 
 void LOFLevelAudioProcessor::resetPeak() { peak = 0.0f; };
 
-float LOFLevelAudioProcessor::getPeak() { return peak; };
+float LOFLevelAudioProcessor::getPeak() { return TOD(peak); };
 
 void LOFLevelAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
