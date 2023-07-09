@@ -26,15 +26,12 @@ public:
                     );
         
         g.setColour (juce::Colours::antiquewhite);
-        g.setFont (20.0f);
+        g.setFont(juce::Font("Chalkduster", 20.0f, 0));
         g.drawFittedText(S2(juce::String(slider.getValue(), 1), " db"), 0, height-25, width, 25, juce::Justification::centred, 1);
         
-//        if (slider.getValue() == 6) {
-//            slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 113, 50);
-//            slider.showTextBox();
-//        } else {
-//            slider.setTextBoxStyle(juce::Slider::NoTextBox, false, 113, 50);
-//        }
+        // NOTE: I made changes in the juce_Slider.cpp file to remove the borders for both the Slider
+        //  component and the label that is inside the Slider component.  This gives a seamless
+        //  transition between the slider and the background image.
     }
 };
 

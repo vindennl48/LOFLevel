@@ -15,6 +15,7 @@
 #include "BasicLabel.h"
 #include "Custom Components/AnalyzeButton.h"
 #include "Custom Components/ImageSlider.h"
+#include "Custom Components/ResetButton.h"
 
 //==============================================================================
 /**
@@ -37,20 +38,19 @@ public:
 
 private:
     juce::Image img_background;
+    
     ImageSlider gainSlider;
+    
     ImageSlider targetSlider;
+    
     ImageSlider thresholdSlider;
     
-    RotaryKnob rotary_gain;
+    AnalyzeButton analyzeButton;
     
-    RotaryKnob rotary_target;
+//    juce::TextButton btn_reset {"Reset"};
+    ResetButton resetButton;
     
-    RotaryKnob rotary_threshold;
-    
-    AnalyzeButton btn_analyze;
-    
-    juce::TextButton btn_reset {"Reset"};
-    BasicLabel label_btn_reset;
+    BasicLabel peakLabel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LOFLevelAudioProcessorEditor)
 };

@@ -13,41 +13,37 @@
 LOFLevelAudioProcessorEditor::LOFLevelAudioProcessorEditor (LOFLevelAudioProcessor& p)
   : AudioProcessorEditor (&p),
     audioProcessor (p),
-    rotary_gain("Gain", p.valueTree, "gain"),
-    rotary_target("Target", p.valueTree, "target"),
-    rotary_threshold("Threshold", p.valueTree, "threshold"),
-    btn_analyze("Analyze", p.valueTree, "analyze"),
-    label_btn_reset("Standby.."),
     gainSlider(p.valueTree, "gain", juce::ImageCache::getFromMemory(BinaryData::GainSlider_png, BinaryData::GainSlider_pngSize)),
     targetSlider(p.valueTree, "target", juce::ImageCache::getFromMemory(BinaryData::TargetSlider_png, BinaryData::TargetSlider_pngSize)),
-    thresholdSlider(p.valueTree, "threshold", juce::ImageCache::getFromMemory(BinaryData::ThresholdSlider_png, BinaryData::ThresholdSlider_pngSize))
+    thresholdSlider(p.valueTree, "threshold", juce::ImageCache::getFromMemory(BinaryData::ThresholdSlider_png, BinaryData::ThresholdSlider_pngSize)),
+    analyzeButton("Analyze", p.valueTree, "analyze"),
+    peakLabel("Standby..")
 {
     // this will run every time the plugin window opens
     
     startTimer(100.0);  // update frequency for peak label
     
-    // custom gain slider
-    addAndMakeVisible(gainSlider);
-    addAndMakeVisible(targetSlider);
-    addAndMakeVisible(thresholdSlider);
+    // custom slider
     
     // GAIN SLIDER
-//    addAndMakeVisible(rotary_gain);
+    addAndMakeVisible(gainSlider);
     
 //     TARGET SLIDER
-//    addAndMakeVisible(rotary_target);
+    addAndMakeVisible(targetSlider);
     
     // THRESHOLD SLIDER
-//    addAndMakeVisible(rotary_threshold);
+    addAndMakeVisible(thresholdSlider);
     
     // ANALYZE BUTTON
-//    addAndMakeVisible(btn_analyze);
+    addAndMakeVisible(analyzeButton);
     
     // RESET BUTTON
-    btn_reset.setClickingTogglesState(false);
-    btn_reset.onClick = [&]() { p.resetPeak(); };
-//    addAndMakeVisible(btn_reset);
-//    addAndMakeVisible(label_btn_reset);
+    resetButton.onClick = [&]() { p.resetPeak(); };
+    addAndMakeVisible(resetButton);
+    
+    peakLabel.setFont(juce::Font("Chalkduster", 48.0f, 1));
+    peakLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
+    addAndMakeVisible(peakLabel);
     
     // WINDOW
     setSize (500, 500);
@@ -57,33 +53,26 @@ LOFLevelAudioProcessorEditor::~LOFLevelAudioProcessorEditor() {}
 
 void LOFLevelAudioProcessorEditor::timerCallback()
 {
-    auto currentGain = TOG(rotary_gain.getValue());
+    auto currentGain = TOG(gainSlider.getValue());
     auto currentPeak = TOG(audioProcessor.getPeak());
     
     // no audio then dont process
     if (currentPeak <= 0.0f) {
-        label_btn_reset.setText("NO SIGNAL", juce::dontSendNotification);
+        peakLabel.setText("N/A", juce::dontSendNotification);
         return;
     }
     
-    auto dbs = TOD(currentPeak * currentGain);
+    auto dbs = juce::String(TOD(currentPeak * currentGain), 1);
     
-    label_btn_reset.setText(S2(dbs, " db peak"), juce::dontSendNotification);
+    peakLabel.setText(dbs, juce::dontSendNotification);
 }
 
 //==============================================================================
 void LOFLevelAudioProcessorEditor::paint (juce::Graphics& g)
 {
-//    img_background = juce::ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
-    img_background = juce::ImageCache::getFromMemory(BinaryData::Background_Layout_png, BinaryData::Background_Layout_pngSize);
+    img_background = juce::ImageCache::getFromMemory(BinaryData::Background_png, BinaryData::Background_pngSize);
+//    img_background = juce::ImageCache::getFromMemory(BinaryData::Background_Layout_png, BinaryData::Background_Layout_pngSize);
     g.drawImageWithin(img_background, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
-    
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    // g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-    // g.setColour (juce::Colours::white);
-    // g.setFont (24.0f);
-    // g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void LOFLevelAudioProcessorEditor::resized()
@@ -92,54 +81,10 @@ void LOFLevelAudioProcessorEditor::resized()
     // subcomponents in your editor..
     // set bounds in this function
     
-    // custom gain slider
     gainSlider.setBounds(6, 6, 101, 437);
     targetSlider.setBounds(6+113, 6, 101, 437);
     thresholdSlider.setBounds(6+113+113, 6, 101, 437);
-    
-    // GAIN SLIDER
-    SET_BOUNDS_FROM_CENTER(rotary_gain,
-                           GET_QPOS_X(2, 1),            // pos X
-                           GET_QPOS_Y(2, 1),            // pos y
-                           PAD(10, GET_QSIZE_X(2)),     // width
-                           PAD(10, GET_QSIZE_Y(2))      // height
-                           );
-    
-    // TARGET SLIDER
-    SET_BOUNDS_FROM_CENTER(rotary_target,
-                           GET_QPOS_X(2, 2),            // pos X
-                           GET_QPOS_Y(2, 1),            // pos y
-                           PAD(10, GET_QSIZE_X(2)),     // width
-                           PAD(10, GET_QSIZE_Y(2))      // height
-                           );
-    
-    // THRESHOLD SLIDER
-    SET_BOUNDS_FROM_CENTER(rotary_threshold,
-                           GET_QPOS_X(2, 1),            // pos X
-                           GET_QPOS_Y(2, 2),            // pos y
-                           PAD(10, GET_QSIZE_X(2)),     // width
-                           PAD(10, GET_QSIZE_Y(2))      // height
-                           );
-    
-    // ANALYZE BUTTON
-    SET_BOUNDS_FROM_CENTER(btn_analyze,                 // component
-                           GET_QPOS_X(2, 2),            // pos X
-                           GET_QPOS_Y(4, 4),            // pos y
-                           PAD(10, GET_QSIZE_X(2)),     // width
-                           PAD(10, GET_QSIZE_Y(4))      // height
-                           );
-    
-    // RESET BUTTON
-    SET_BOUNDS_FROM_CENTER(btn_reset,                   // component
-                           GET_QPOS_X(4, 4),            // pos X
-                           GET_QPOS_Y(4, 3),            // pos y
-                           PAD(10, GET_QSIZE_X(4)),     // width
-                           PAD(10, GET_QSIZE_Y(6))      // height
-                           );
-    SET_BOUNDS_FROM_CENTER(label_btn_reset,             // component
-                           GET_QPOS_X(4, 3),            // pos X
-                           GET_QPOS_Y(4, 3),            // pos y
-                           PAD(10, GET_QSIZE_X(4)),     // width
-                           PAD(10, GET_QSIZE_Y(6))      // height
-                           );
+    analyzeButton.setBounds(338, 247, 161, 204);
+    resetButton.setBounds(344, 118, 149, 44);
+    peakLabel.setBounds(344, 30, 149, 44);
 }

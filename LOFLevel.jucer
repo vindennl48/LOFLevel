@@ -14,6 +14,7 @@
       <GROUP id="{136DD4FE-16C8-9FB8-8EFF-098B689CBAEF}" name="Custom Components">
         <FILE id="Pzgby5" name="AnalyzeButton.h" compile="0" resource="0" file="Source/Custom Components/AnalyzeButton.h"/>
         <FILE id="M2hHoK" name="ImageSlider.h" compile="0" resource="0" file="Source/Custom Components/ImageSlider.h"/>
+        <FILE id="hXUcSO" name="ResetButton.h" compile="0" resource="0" file="Source/Custom Components/ResetButton.h"/>
       </GROUP>
       <GROUP id="{4D94C5E3-8609-FBA6-FB90-481D020435DE}" name="Assets">
         <FILE id="XP0M3y" name="AnalyzeButton_hover.png" compile="0" resource="1"
