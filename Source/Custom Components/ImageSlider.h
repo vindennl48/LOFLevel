@@ -32,6 +32,7 @@ public:
         // NOTE: I made changes in the juce_Slider.cpp file to remove the borders for both the Slider
         //  component and the label that is inside the Slider component.  This gives a seamless
         //  transition between the slider and the background image.
+        //  If you search for 'CHANGEDHERE' in juce_Slider.cpp, you can find the changes.
     }
 };
 
