@@ -43,10 +43,10 @@ LOFLevelAudioProcessor::~LOFLevelAudioProcessor()
 juce::AudioProcessorValueTreeState::ParameterLayout LOFLevelAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add( std::make_unique<juce::AudioParameterFloat>( juce::ParameterID { "gain",  1 }, "Gain",  -24.0f,  12.0f, 0.0f) );
-    layout.add( std::make_unique<juce::AudioParameterFloat>( juce::ParameterID { "target",  2 }, "Target",  -24.0f,  12.0f, 0.0f) );
-    layout.add( std::make_unique<juce::AudioParameterFloat>( juce::ParameterID { "threshold",  3 }, "Threshold",  -24.0f,  12.0f, 0.0f) );
-    layout.add( std::make_unique<juce::AudioParameterBool>( juce::ParameterID { "analyze", 4 }, "Analyze", false ) );
+    layout.add( std::make_unique<juce::AudioParameterFloat>( juce::ParameterID { "gain",      1 }, "Gain",      -36.0f, 36.0f, 0.0f) );
+    layout.add( std::make_unique<juce::AudioParameterFloat>( juce::ParameterID { "target",    2 }, "Target",    -36.0f, 36.0f, 0.0f) );
+    layout.add( std::make_unique<juce::AudioParameterFloat>( juce::ParameterID { "threshold", 3 }, "Threshold", -36.0f, 36.0f, 0.0f) );
+    layout.add( std::make_unique<juce::AudioParameterBool>(  juce::ParameterID { "analyze",   4 }, "Analyze",   false) );
     return layout;
 }
 
